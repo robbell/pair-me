@@ -1,2 +1,2 @@
-# pair-me
-PairMe is a Slack slash command for finding partners to pair with
+# PairMe
+PairMe is a [Slack slash command](https://api.slack.com/slash-commands) to help match up pair programming partners.
