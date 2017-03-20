@@ -25,17 +25,17 @@ namespace PairMe.Api.Controllers
     public class PairCommandRequest
     {
         public string Token { get; set; }
-        [FromQuery(Name = "team_id")]
+        [FromForm(Name = "team_id")]
         public string TeamId { get; set; }
-        [FromQuery(Name = "team_domain")]
+        [FromForm(Name = "team_domain")]
         public string TeamDomain { get; set; }
-        [FromQuery(Name = "channel_id")]
+        [FromForm(Name = "channel_id")]
         public string ChannelId { get; set; }
-        [FromQuery(Name = "channel_name")]
+        [FromForm(Name = "channel_name")]
         public string ChannelName { get; set; }
-        [FromQuery(Name = "user_id")]
+        [FromForm(Name = "user_id")]
         public string UserId { get; set; }
-        [FromQuery(Name = "user_name")]
+        [FromForm(Name = "user_name")]
         public string Username { get; set; }
         public string Command { get; set; }
         public string Text { get; set; }
