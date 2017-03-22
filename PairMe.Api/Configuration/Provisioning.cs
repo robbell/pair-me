@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 
-namespace PairMe.Api
+namespace PairMe.Api.Configuration
 {
     public class DocumentDbProvisioning
     {

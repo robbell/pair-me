@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using PairMe.Api.Configuration;
 
 namespace PairMe.Api
 {

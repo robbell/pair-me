@@ -1,12 +1,10 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Azure.Documents.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace PairMe.Api
+namespace PairMe.Api.Configuration
 {
     public class Startup
     {
@@ -36,6 +34,8 @@ namespace PairMe.Api
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+
+            services.Configure<DocumentDbOptions>(Configuration.GetSection("AppSettings:DocumentDb"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
