@@ -28,6 +28,8 @@ namespace PairMe.Api.Controllers
 
             if (!potentialPartners.Any())
             {
+                AddToPotentialPartners(availabilityDetails);
+
                 return new PairCommandResponse { Text = "There are no partners available yet, but we'll notify you if any become available" };
             }
 
@@ -50,13 +52,23 @@ namespace PairMe.Api.Controllers
             return response;
         }
 
+        private void AddToPotentialPartners(PairOpportunity availabilityDetails)
+        {
+            using (var client = new DocumentClient(new Uri(documentDbOptions.AccountEndpoint), documentDbOptions.AccountKey))
+            {
+                client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(documentDbOptions.Database, documentDbOptions.Collection),
+                                           availabilityDetails).Wait();
+            }
+        }
+
         private IList<PairOpportunity> GetPotentialPartners(PairOpportunity opportunity)
         {
             using (var client = new DocumentClient(new Uri(documentDbOptions.AccountEndpoint), documentDbOptions.AccountKey))
             {
                 return
-                    client.CreateDocumentQuery<PairOpportunity>(
-                        UriFactory.CreateDocumentCollectionUri(documentDbOptions.Database, documentDbOptions.Collection)).ToList();
+                    client.CreateDocumentQuery<PairOpportunity>(UriFactory.CreateDocumentCollectionUri(documentDbOptions.Database,
+                                                                                                       documentDbOptions.Collection))
+                          .Where(p => p.UserId != opportunity.UserId).ToList();
             }
         }
 
@@ -65,13 +77,15 @@ namespace PairMe.Api.Controllers
             return new PairOpportunity
             {
                 StartTime = DateTime.Now.AddHours(1),
-                EndTime = DateTime.Now.AddHours(2)
+                EndTime = DateTime.Now.AddHours(2),
+                UserId = commandRequest.UserId
             };
         }
     }
 
     public class PairOpportunity
     {
+        public string UserId { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
     }
