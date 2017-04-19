@@ -40,8 +40,8 @@ namespace PairMe.Api.Controllers
                     {
                         Actions =
                         {
-                            new Action { Name = "A", Text = "a text", Type = "button", Value = "a" },
-                            new Action { Name = "B", Text = "b text", Type = "button", Value = "b" }
+                            new Action { Name = "accept", Text = "Accept", Type = "button", Value = "accept" },
+                            new Action { Name = "decline", Text = "Decline", Type = "button", Value = "decline" }
                         }
                     }
                 }
